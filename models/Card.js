@@ -21,7 +21,7 @@ Card.init(
       allowNull: false
     },
     actionEffect: {
-      type: DataType.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     user_id: {

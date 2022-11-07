@@ -12,6 +12,10 @@ Meter.init(
       primaryKey: true,
       autoIncrement: true
     },  
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     gauge: {
       type: DataTypes.INTEGER,
       allowNull: false,

@@ -3,7 +3,7 @@ const Cat = require('./Cat');
 const Card = require('./Card');
 const Meter = require('./Meter');
 
-User.hasMany(Cards, {
+User.hasMany(Card, {
   foreignKey: 'user_id',
   onDelete: 'CASCADE'
 });
@@ -21,7 +21,7 @@ Meter.belongsTo(Cat, {
   foreignKey: 'cat_id',
 });
 
-User.has(Cat, {
+User.hasOne(Cat, {
   foreignKey: 'user_id',
   onDelete: 'CASCADE'
 });
