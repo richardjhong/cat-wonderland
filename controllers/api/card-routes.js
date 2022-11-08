@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 
 
     res.render('homepage', {
-      cards, cats
+      cards, cats, gameHasStarted: req.session.gameHasStarted
     });
   } catch (err) {
     console.log(err);
