@@ -3,6 +3,7 @@ const { Cat } = require('../models');
 const catData = [
   {
     name: 'Scratchy',
+    health: 100,
     user_id: 1
   },
 ];
