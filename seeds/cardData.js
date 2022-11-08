@@ -16,7 +16,61 @@ const cardData = [
   {
     name: 'Cat bath',
     description: `Washed the cat; its eyes are full of resentment`,
+    actionEffect: -2,
+    user_id: 1
+  },
+  {
+    name: 'New kitty litter',
+    description: `You bought new kitty litter, but the cat prefers its old kitty litter. It leaves a hairball by your shoes`,
     actionEffect: -5,
+    user_id: 1
+  },
+  {
+    name: 'Clean kitty litter',
+    description: `You cleaned out the litter box. The cat now feels neutral towards you`,
+    actionEffect: +5,
+    user_id: 1
+  },
+  {
+    name: 'Water fountain',
+    description: `You bought the cat a water fountain. It has filtered water and the cat is thinking about not hating you. Maybe`,
+    actionEffect: +5,
+    user_id: 1
+  },
+  {
+    name: 'Forgot dinner time',
+    description: `You fed the cat three minutes later than usual. The cat is now eating second dinner at the neighbor's house`,
+    actionEffect: -5,
+    user_id: 1
+  },
+  {
+    name: 'Rain outside',
+    description: `You let the cat outside this morning and it started raining before you were able to let the cat back in. The cat has now adopted the neighbor's 10 year old as its new mother`,
+    actionEffect: -5,
+    user_id: 1
+  },
+  {
+    name: 'Empty amazon box',
+    description: `You forgot to recycle an old amazon box. It is the cat's new castle`,
+    actionEffect: +5,
+    user_id: 1
+  },
+  {
+    name: 'New puppy',
+    description: `You got a new puppy. It is the cat's nemesis`,
+    actionEffect: -5,
+    user_id: 1
+  },
+  {
+    name: 'New litter box',
+    description: `The cat stared at you yesterday for 20 minutes to tell you it wanted a second litter box upstairs. You did not read its mind`,
+    actionEffect: -5,
+    user_id: 1
+  },
+  {
+    name: 'Extra litter box',
+    description: `You put a litter box in the upstairs bathroom. The cat has options`,
+    actionEffect: +5,
     user_id: 1
   },
 ];
