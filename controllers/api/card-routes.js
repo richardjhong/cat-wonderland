@@ -6,6 +6,25 @@ const deckbuilder = new Deckbuilder({ maxDeckSize: 3 });
 
 router.get('/', async (req, res) => {
   try {
+    const cards = deckbuilder.deck
+    const catData = await Cat.findAll();
+
+    const cats = catData.map((cat) =>
+      cat.get({ plain: true })
+    );
+
+
+    res.render('homepage', {
+      cards, cats
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get('/start', async (req, res) => {
+  try {
     const dbCardDeckData = await Card.findAll();
     const catData = await Cat.findAll();
 
@@ -22,10 +41,11 @@ router.get('/', async (req, res) => {
 
     req.session.save(() => {
       req.session.catHealth = cats[0].health
+      req.session.gameHasStarted = true;
     })
 
     res.render('homepage', {
-      cards, cats
+      cards, cats, gameHasStarted: req.session.gameHasStarted
     });
   } catch (err) {
     console.log(err);
@@ -36,6 +56,7 @@ router.get('/', async (req, res) => {
 router.post('/:id', async (req, res) => {
   try {
     let cardId = req.params.id;
+    console.log("deckbuilder before discard? ", deckbuilder)
     await deckbuilder.discard(cardId)
 
     const updatedHealth = parseInt(req.session.catHealth) + parseInt(req.body.actionEffect)
@@ -52,7 +73,11 @@ router.post('/:id', async (req, res) => {
       }
     })
 
-    res.status(200).json(updatedCatData);
+    console.log('current hand?: ', deckbuilder)
+
+    res.render('homepage', {
+      deckbuilder, updatedCatData
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
