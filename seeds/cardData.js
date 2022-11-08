@@ -16,7 +16,7 @@ const cardData = [
   {
     name: 'Cat bath',
     description: `Washed the cat; its eyes are full of resentment`,
-    actionEffect: -5,
+    actionEffect: -2,
     user_id: 1
   },
 ];
