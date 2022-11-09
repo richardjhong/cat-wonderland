@@ -1,4 +1,5 @@
 const Deckbuilder = require('deckbuilder');
+const { response } = require('express');
 const router = require('express').Router();
 const { Cat } = require('../../models');
 const cardPool = require("../../seeds/mockCardData.js")
@@ -15,8 +16,13 @@ router.get('/', async (req, res) => {
     );
 
     res.render('homepage', {
-      cards, cats, gameHasStarted: req.session.gameHasStarted
+      cards, 
+      cats, 
+      gameHasStarted: req.session.gameHasStarted, 
+      maxCardsInHand: deckbuilder.drawn.length === 5, 
+      oneCardHand: deckbuilder.drawn.length === 1 ? false : true
     });
+
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -31,6 +37,7 @@ router.get('/start', async (req, res) => {
       cat.get({ plain: true })
     );
 
+    // create starting game hand to player
     deckbuilder.add(cardPool)
     deckbuilder.shuffle(2);
     deckbuilder.deal(1, 5)// 5 cards to 1 player
@@ -43,7 +50,9 @@ router.get('/start', async (req, res) => {
     })
 
     res.render('homepage', {
-      cards, cats, gameHasStarted: req.session.gameHasStarted
+      cards, 
+      cats, 
+      gameHasStarted: req.session.gameHasStarted
     });
   } catch (err) {
     console.log(err);
@@ -51,10 +60,11 @@ router.get('/start', async (req, res) => {
   }
 });
 
-router.post('/:id', async (req, res) => {
+router.post('/play/:id', async (req, res) => {
   try {
     let cardId = req.params.id;
     await deckbuilder.discard(parseInt(cardId))
+    await deckbuilder.draw(1)
     
     const updatedHealth = parseInt(req.session.catHealth) + parseInt(req.body.actionEffect)
 
@@ -62,7 +72,8 @@ router.post('/:id', async (req, res) => {
       req.session.catHealth = updatedHealth
     })
 
-    const updatedCatData = await Cat.update(
+    // update catHealth to account for this turn's card action effect
+    await Cat.update( 
       { health: updatedHealth },
       {
       where: {
@@ -70,9 +81,18 @@ router.post('/:id', async (req, res) => {
       }
     })
 
-    const cards = deckbuilder.drawn
-
     res.status(200).json({ message: 'Card has successfully been played and taken out of player hand.' })
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+})
+
+router.post('/discard', async (req, res) => {
+  try {
+    await deckbuilder.discard(parseInt(req.body.cardId))
+
+    res.status(200).json({ message: 'Card has successfully been discarded.'})
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

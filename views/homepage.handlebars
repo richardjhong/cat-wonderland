@@ -1,10 +1,11 @@
 <section class="container">
   {{#unless gameHasStarted}}<button class="btn btn-primary" id="startGame">Start Game</button>{{/unless}}
   {{#each cards as |card|}}
-    {{> card-details}}
+    {{> card-details enableDrawCards=../maxCardsInHand enableDiscardCards=../oneCardHand}}
   {{/each}}
   
   {{#each cats as |cat|}}
     {{> cat-details}}
   {{/each}}
+  <p> Test maxCardsBool: {{maxCardsInHand}} oneCardBool: {{oneCardHand}}</p>
 </section>
