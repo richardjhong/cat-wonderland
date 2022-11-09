@@ -35,5 +35,10 @@
     <script src="/js/logout.js"</script></script>
     {{/if}}
     <script src="/js/startgame.js"></script>
+  </main>  
+  <script src="/js/playcard.js"></script>
+  {{#unless gameHasStarted}}
+    <script src="/js/startgame.js"></script>
+  {{/unless}}
 </body>
 </html>
