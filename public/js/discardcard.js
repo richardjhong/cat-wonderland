@@ -1,11 +1,16 @@
 const discardCardHandler = async (e) => {
   e.preventDefault();
-  const cardId = await e.target.dataset.card_id;
+
+  let checkboxes = document.querySelectorAll('input[name="discard-boxes"]:checked')
+  let values = [];
+  checkboxes.forEach((checkbox) => {
+    values.push(parseInt(checkbox.value));
+  });
 
   const response = await fetch(`/api/cards/discard`, {
     method: 'POST',
     body: JSON.stringify({
-      cardId: cardId,
+      toDiscard: values
     }),
     headers: { 'Content-Type': 'application/json' }
   });
@@ -13,11 +18,9 @@ const discardCardHandler = async (e) => {
   if (response.ok) {
     document.location.replace(`/api/cards`)
   } else {
-    alert('Failed to dicard selected card.');
+    alert('Failed to discard selected card(s).');
   }
 }
 
-const discardCard = document.querySelectorAll('.discardCard')
-discardCard.forEach(card => {
-  card.addEventListener('click', discardCardHandler);
-})
+const discardButton = document.querySelector('#discard-button')
+discardButton.addEventListener('click', discardCardHandler)
