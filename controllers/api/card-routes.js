@@ -16,8 +16,13 @@ router.get('/', async (req, res) => {
     );
 
     res.render('homepage', {
-      cards, cats, gameHasStarted: req.session.gameHasStarted, maxCardsInHand: req.session.maxCardsInHand,
+      cards, 
+      cats, 
+      gameHasStarted: req.session.gameHasStarted, 
+      maxCardsInHand: deckbuilder.drawn.length === 5, 
+      oneCardHand: deckbuilder.drawn.length === 1 ? false : true
     });
+
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -45,7 +50,9 @@ router.get('/start', async (req, res) => {
     })
 
     res.render('homepage', {
-      cards, cats, gameHasStarted: req.session.gameHasStarted
+      cards, 
+      cats, 
+      gameHasStarted: req.session.gameHasStarted
     });
   } catch (err) {
     console.log(err);
@@ -63,7 +70,6 @@ router.post('/play/:id', async (req, res) => {
 
     req.session.save(() => {
       req.session.catHealth = updatedHealth
-      req.session.maxCardsInHand = deckbuilder.drawn.length === 5 ? true : false
     })
 
     // update catHealth to account for this turn's card action effect
@@ -85,9 +91,7 @@ router.post('/play/:id', async (req, res) => {
 router.post('/discard', async (req, res) => {
   try {
     await deckbuilder.discard(parseInt(req.body.cardId))
-    req.session.save(() => {
-      req.session.maxCardsInHand = false;
-    })
+
     res.status(200).json({ message: 'Card has successfully been discarded.'})
   } catch (err) {
     console.log(err);
