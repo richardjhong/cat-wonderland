@@ -18,6 +18,6 @@ const discardCardHandler = async (e) => {
 }
 
 const discardCard = document.querySelectorAll('.discardCard')
-discardCard.forEach(play => {
-  play.addEventListener('click', discardCardHandler);
+discardCard.forEach(card => {
+  card.addEventListener('click', discardCardHandler);
 })
