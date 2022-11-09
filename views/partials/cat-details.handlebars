@@ -2,6 +2,7 @@
   <img src="..." class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{name}}</h5>
-    <p class="card-text">Health points: {{health}}</p>
+    <p class="card-text">Health points: <span id="cardHealth">{{health}}</span></p>
   </div>
+  {{>meter}}
 </div>
