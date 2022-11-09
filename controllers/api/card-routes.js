@@ -13,6 +13,7 @@ router.get('/', async (req, res) => {
       cat.get({ plain: true })
     );
 
+    
 
     res.render('homepage', {
       cards, cats, gameHasStarted: req.session.gameHasStarted
