@@ -32,6 +32,7 @@ router.get('/start', async (req, res) => {
       cat.get({ plain: true })
     );
 
+    // create starting game hand to player
     deckbuilder.add(cardPool)
     deckbuilder.shuffle(2);
     deckbuilder.deal(1, 5)// 5 cards to 1 player
