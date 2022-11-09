@@ -90,9 +90,20 @@ router.post('/play/:id', async (req, res) => {
 
 router.post('/discard', async (req, res) => {
   try {
-    await deckbuilder.discard(parseInt(req.body.cardId))
-
+    const amountToDraw = req.body.toDiscard.length
+    await deckbuilder.discard(req.body.toDiscard)
+    deckbuilder.draw(amountToDraw)
     res.status(200).json({ message: 'Card has successfully been discarded.'})
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+})
+
+router.get('/draw', async (req, res) => {
+  try {
+    await deckbuilder.draw(1)
+    res.status(200).json({ message: 'Card has successfully been drawn.'})
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
