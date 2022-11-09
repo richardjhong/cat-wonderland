@@ -4,8 +4,6 @@ const playCardHandler = async (e) => {
   const actionEffect = await e.target.dataset.action_effect;
   const cardId = await e.target.dataset.card_id;
 
-  console.log('cardId: ', cardId)
-
   const response = await fetch(`/api/cards/${cardId}`, {
     method: 'POST',
     body: JSON.stringify({

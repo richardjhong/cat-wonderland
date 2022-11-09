@@ -1,6 +1,6 @@
 const Deckbuilder = require('deckbuilder');
 const router = require('express').Router();
-const { Card, Cat } = require('../../models');
+const { Cat } = require('../../models');
 const cardPool = require("../../seeds/mockCardData.js")
 
 const deckbuilder = new Deckbuilder({ maxDeckSize: 10 });
@@ -72,10 +72,7 @@ router.post('/:id', async (req, res) => {
 
     const cards = deckbuilder.drawn
 
-    // res.render('homepage', {
-    //   cards, updatedCatData
-    // });
-    res.status(200).json({ message: 'Card has successfully been played and taken out of player hand' })
+    res.status(200).json({ message: 'Card has successfully been played and taken out of player hand.' })
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
