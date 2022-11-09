@@ -15,6 +15,4 @@ const startGameHandler = async (e) => {
 
 
 const startGameButton = document.querySelector('#startGame')
-
-console.log('startGameButton: ', startGameButton)
 startGameButton.addEventListener('click', startGameHandler)

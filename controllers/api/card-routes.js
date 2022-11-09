@@ -1,23 +1,29 @@
 const Deckbuilder = require('deckbuilder');
+const { response } = require('express');
 const router = require('express').Router();
-const { Card, Cat } = require('../../models');
+const { Cat } = require('../../models');
+const cardPool = require("../../seeds/mockCardData.js")
 
-const deckbuilder = new Deckbuilder({ maxDeckSize: 3 });
+const deckbuilder = new Deckbuilder({ maxDeckSize: 10 });
 
 router.get('/', async (req, res) => {
   try {
-    const cards = deckbuilder.deck
+    const cards = deckbuilder.drawn
     const catData = await Cat.findAll();
 
     const cats = catData.map((cat) =>
       cat.get({ plain: true })
     );
 
-    
 
     res.render('homepage', {
-      cards, cats, gameHasStarted: req.session.gameHasStarted
+      cards, 
+      cats, 
+      gameHasStarted: req.session.gameHasStarted, 
+      maxCardsInHand: deckbuilder.drawn.length === 5, 
+      oneCardHand: deckbuilder.drawn.length === 1 ? false : true
     });
+
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -26,19 +32,18 @@ router.get('/', async (req, res) => {
 
 router.get('/start', async (req, res) => {
   try {
-    const dbCardDeckData = await Card.findAll();
     const catData = await Cat.findAll();
 
-    const cardPool = dbCardDeckData.map((card) =>
-      card.get({ plain: true })
-    );
     const cats = catData.map((cat) =>
       cat.get({ plain: true })
     );
 
+    // create starting game hand to player
     deckbuilder.add(cardPool)
     deckbuilder.shuffle(2);
-    const cards = deckbuilder.deal(1, 2)['1'] // 2 cards to 1 player
+    deckbuilder.deal(1, 5)// 5 cards to 1 player
+
+    const cards = deckbuilder['1']
 
     req.session.save(() => {
       req.session.catHealth = cats[0].health
@@ -46,7 +51,9 @@ router.get('/start', async (req, res) => {
     })
 
     res.render('homepage', {
-      cards, cats, gameHasStarted: req.session.gameHasStarted
+      cards, 
+      cats, 
+      gameHasStarted: req.session.gameHasStarted
     });
   } catch (err) {
     console.log(err);
@@ -54,19 +61,20 @@ router.get('/start', async (req, res) => {
   }
 });
 
-router.post('/:id', async (req, res) => {
+router.post('/play/:id', async (req, res) => {
   try {
     let cardId = req.params.id;
-    console.log("deckbuilder before discard? ", deckbuilder)
-    await deckbuilder.discard(cardId)
-
+    await deckbuilder.discard(parseInt(cardId))
+    await deckbuilder.draw(1)
+    
     const updatedHealth = parseInt(req.session.catHealth) + parseInt(req.body.actionEffect)
 
     req.session.save(() => {
       req.session.catHealth = updatedHealth
     })
 
-    const updatedCatData = await Cat.update(
+    // update catHealth to account for this turn's card action effect
+    await Cat.update( 
       { health: updatedHealth },
       {
       where: {
@@ -74,11 +82,29 @@ router.post('/:id', async (req, res) => {
       }
     })
 
-    console.log('current hand?: ', deckbuilder)
+    res.status(200).json({ message: 'Card has successfully been played and taken out of player hand.' })
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+})
 
-    res.render('homepage', {
-      deckbuilder, updatedCatData
-    });
+router.post('/discard', async (req, res) => {
+  try {
+    const amountToDraw = req.body.toDiscard.length
+    await deckbuilder.discard(req.body.toDiscard)
+    deckbuilder.draw(amountToDraw)
+    res.status(200).json({ message: 'Card has successfully been discarded.'})
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+})
+
+router.get('/draw', async (req, res) => {
+  try {
+    await deckbuilder.draw(1)
+    res.status(200).json({ message: 'Card has successfully been drawn.'})
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
