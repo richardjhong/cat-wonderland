@@ -4,7 +4,7 @@ const playCardHandler = async (e) => {
   const actionEffect = await e.target.dataset.action_effect;
   const cardId = await e.target.dataset.card_id;
 
-  const response = await fetch(`/api/cards/${cardId}`, {
+  const response = await fetch(`/api/cards/play/${cardId}`, {
     method: 'POST',
     body: JSON.stringify({
       actionEffect: actionEffect,
@@ -15,7 +15,7 @@ const playCardHandler = async (e) => {
   if (response.ok) {
     document.location.replace(`/api/cards`)
   } else {
-    alert('Failed to post new data.');
+    alert('Failed to play card.');
   }
 }
 

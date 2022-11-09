@@ -6,7 +6,9 @@
   </div>
   <div class="card-body">
     <button class="btn btn-primary useCard" id="useCard" data-action_effect="{{actionEffect}}" data-card_id="{{id}}">Use Card</button>
-    <button class="btn btn-primary" id="skipCard">Skip Card</button>
-    <button class="btn btn-primary" id="chooseAnother">Choose Another Card</button>
+    <button class="btn btn-primary discardCard" id="discardCard" data-card_id="{{id}}">Discard Card</button>
+    {{#unless enableDrawCards}}
+    <button class="btn btn-primary" id="chooseAnother">Draw Another Card</button>
+    {{/unless}}
   </div>
 </div>
