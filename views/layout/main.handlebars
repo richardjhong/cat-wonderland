@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cat Wonderland</title>
-  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Indie+Flower&family=Kalam&family=Kaushan+Script&family=Shalimar&display=swap" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="/css/jass.css">
-  <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="">
+    <script src="jquery-3.6.0.min.js"></script>
 </head>
-
 <body>
     <div class="flex-column justify-space-around">
         <header class="display-flex justify-space-between align-centeer p-2">
@@ -19,6 +18,7 @@
             </h1>
             <nav>
                 {{#if logged_in}}
+                <a href="/profile">profile</a>
                 <button class="no-button" id="logout">logout</button>
                 {{else}}
                 <a href="/login">login</a>
@@ -32,20 +32,8 @@
 
         </footer>
     </div>
+
     {{#if logged_in}}
     <script src="/js/logout.js"</script></script>
-    {{/if}}
-  </main>  
-  <script src="/js/playcard.js"></script>
-<<<<<<< HEAD
-  <script src="/js/startgame.js"></script>
-  <script src="/js/healthbar.js"></script>
-=======
-  <script src="/js/discardcard.js"></script>
-  <script src="/js/drawcard.js"></script>
-  {{#unless gameHasStarted}}
-    <script src="/js/startgame.js"></script>
-  {{/unless}}
->>>>>>> main
 </body>
 </html>
