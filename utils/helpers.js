@@ -20,7 +20,5 @@ module.exports = {
         context.fillRect(object1.x, object1.y, object1.width * percent, object1.height);
 
 
-    },
-    
-    
+    },   
 }

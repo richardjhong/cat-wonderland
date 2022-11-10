@@ -21,7 +21,7 @@
                 {{#if logged_in}}
                 <button class="no-button" id="logout">logout</button>
                 {{else}}
-                <a href="/login">login</a>
+                <a href="./login">login</a>
                 {{/if}}
             </nav>
         </header> 
@@ -33,19 +33,16 @@
         </footer>
     </div>
     {{#if logged_in}}
-    <script src="/js/logout.js"</script></script>
+    <script src="./js/logout.js"</script></script>
     {{/if}}
   </main>  
-  <script src="/js/playcard.js"></script>
-<<<<<<< HEAD
-  <script src="/js/startgame.js"></script>
-  <script src="/js/healthbar.js"></script>
-=======
-  <script src="/js/discardcard.js"></script>
-  <script src="/js/drawcard.js"></script>
+  <script src="./js/playcard.js"></script>
+  <script src="./js/startgame.js"></script>
+  <script src="./js/healthbar.js"></script>
+  <script src="./js/discardcard.js"></script>
+  <script src="./js/drawcard.js"></script>
   {{#unless gameHasStarted}}
-    <script src="/js/startgame.js"></script>
+    <script src="./js/startgame.js"></script>
   {{/unless}}
->>>>>>> main
 </body>
 </html>
