@@ -71,6 +71,17 @@ const cardData = [
     description: `You put a litter box in the upstairs bathroom. The cat has options`,
     actionEffect: +5,
   },
+    id: 13,
+    name: 'Adventuring outside',
+    description: 'You let your cat adventure outside',
+    actionEffect: +5,
+  },
+  {
+    id: 14,
+    name: 'Not let your put adventuring outside',
+    description: 'Tell your pet to stay inside',
+    actionEffect: -5,
+  },
 ];
 
 
