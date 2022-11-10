@@ -64,7 +64,7 @@ router.get('/start', async (req, res) => {
     req.session.save(() => {
       req.session.catHealth = cats.health
       req.session.gameHasStarted = true;
-      req.session.gameTurns = 100;
+      req.session.gameTurns = 20;
     })
 
     res.render('homepage', {
