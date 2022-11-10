@@ -10,7 +10,7 @@ const helpers = require('./utils/helpers');
 const Deckbuilder = require('deckbuilder');
 
 const app = express();
-const PORT = process.env.PORT || 3008;
+const PORT = process.env.PORT || 3001;
 
 // Set up sessions
 const sess = {
