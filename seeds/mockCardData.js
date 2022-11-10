@@ -1,4 +1,5 @@
-const cardData = [{
+const cardData = [
+    {
         id: 1,
         name: 'Restock cat food',
         description: 'Restocked cat food for 3 days!',
@@ -89,6 +90,5 @@ const cardData = [{
         actionEffect: +5,
     }
 ];
-
 
 module.exports = cardData;
