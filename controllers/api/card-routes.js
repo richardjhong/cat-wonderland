@@ -43,17 +43,16 @@ router.get('/', async (req, res) => {
 
 router.get('/start', async (req, res) => {
   try {
-    const catData = await Cat.findAll();
 
-    await Cat.update( 
-      { health: 100 },
+    const cat3 = await Cat.update( 
+      { health: 130 },
       {
       where: {
         id: 1
       }
     })
 
-    const cats = await Cat.findOne({ where: { id: 1 }})
+    let cats = await Cat.findOne({ where: { id: 1 }})
 
     // create starting game hand to player
     deckbuilder.add(cardPool)
@@ -62,8 +61,10 @@ router.get('/start', async (req, res) => {
 
     const cards = deckbuilder['1']
 
+    let health = cats.dataValues.health
+
     req.session.save(() => {
-      req.session.catHealth = cats.health
+      req.session.catHealth = health
       req.session.gameHasStarted = true;
       req.session.gameTurns = 20;
     })
