@@ -3,7 +3,8 @@ const router = require('express').Router();
 const { Cat } = require('../../models');
 const cardPool = require("../../seeds/mockCardData.js")
 
-const deckbuilder = new Deckbuilder({ maxDeckSize: 10 });
+const deckbuilder = new Deckbuilder();
+const discardedPile = [];
 
 router.get('/', async (req, res) => {
   try {
@@ -63,7 +64,7 @@ router.get('/start', async (req, res) => {
     req.session.save(() => {
       req.session.catHealth = cats.health
       req.session.gameHasStarted = true;
-      req.session.gameTurns = 10;
+      req.session.gameTurns = 20;
     })
 
     res.render('homepage', {
@@ -82,8 +83,12 @@ router.post('/play/:id', async (req, res) => {
   try {
     let cardId = req.params.id;
     await deckbuilder.discard(parseInt(cardId))
+    discardedPile.push(deckbuilder.discarded[0].id)
+    if (deckbuilder.deck.length === 0) {
+      await deckbuilder.returnDiscarded();
+    }
     await deckbuilder.draw(1)
-    
+
     const updatedHealth = parseInt(req.session.catHealth) + parseInt(req.body.actionEffect)
 
     req.session.save(() => {
@@ -110,6 +115,9 @@ router.post('/discard', async (req, res) => {
   try {
     const amountToDraw = req.body.toDiscard.length
     await deckbuilder.discard(req.body.toDiscard)
+    if (deckbuilder.deck.length < 5) {
+      await deckbuilder.returnDiscarded();
+    }
     deckbuilder.draw(amountToDraw)
     res.status(200).json({ message: 'Card has successfully been discarded.'})
   } catch (err) {
