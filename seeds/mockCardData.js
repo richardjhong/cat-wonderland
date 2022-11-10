@@ -75,7 +75,8 @@ const cardData = [{
         name: 'Adventuring outside',
         description: 'You let your cat adventure outside',
         actionEffect: +5,
-    } {
+    },
+    {
         id: 14,
         name: 'Not let your put adventuring outside',
         description: 'Tell your pet to stay inside',
