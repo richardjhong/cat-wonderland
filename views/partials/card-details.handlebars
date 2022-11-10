@@ -3,14 +3,11 @@
   <div class="card-header">
     <h5 class="card-title">{{name}}</h5>
     <p class="card-text">Description: {{description}}</p>
+    <p class="card-text">Effect: {{actionEffect}}</p>
     <input class="checkbox-discard" type="checkbox" name="discard-boxes" value="{{id}}">
   </div>
   <div class="card-body">
     <button class="btn btn-primary useCard" id="useCard" data-action_effect="{{actionEffect}}" data-card_id="{{id}}">Use Card</button>
-    {{!-- if drawn cards are not at 1 --}}
-    {{#if enableDiscardCards}}
-    <button class="btn btn-primary discardCard" id="discardCard" data-card_id="{{id}}">Discard Card</button>
-    {{/if}}
     {{!-- if max drawn cards is not at limit --}}
     {{#unless enableDrawCards}}
     <button class="btn btn-primary drawCard" id="chooseAnother">Draw Another Card</button>
