@@ -31,7 +31,7 @@ router.post('/login', async (req, res) => {
     if (!dbUserData) {
       res
         .status(400)
-        .json({ message: 'Incorrect email or password. Please try again!' });
+        .json({ message: 'Wrong email or password. Try again to enter Cat Wonderland!' });
       return;
     }
 
