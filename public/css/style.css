@@ -11,7 +11,7 @@
 }
 
 body {
-  font-family: 'Indie Flower', cursive;
+  font-family: 'Gloria Hallelujah', cursive;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -128,13 +128,13 @@ img {
   border-radius: 10px;
   background-color: var(--tertiary);
   color: var(--primary);
-  width: 100%;
+  width: 50px;
+  height: 450px;
 }
 
 .login-card {
   margin: 0 0 20px 0;
   flex: 0 0 50%;
-  max-width: 50%;
   padding: 5px;
   border: 3px solid var(--dark);
   border-radius: var(--border-radius);
@@ -144,11 +144,15 @@ img {
   color: var(--primary);
 }
 
+.card .card-header{
+  margin:13px;
+}
+
 .card-header {
   font-size: 1.4rem;
   text-align: center;
   font-weight: bold;
-  background-color:#F0F0F0;
+  background-color:var(--tertiary);
   display:inline-block;
   padding:1em;
   margin:5em;
@@ -175,7 +179,7 @@ img {
 /* LAYOUT */
 .container {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: row wrap;
   align-content: flex-start;
   align-items: center;
 }
@@ -198,4 +202,8 @@ input[type="checkbox"]{
 .selected {
   background-color:#1B879D;
   color:#fff
+}
+
+#useCard{
+  margin-bottom: 5px;
 }
