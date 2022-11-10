@@ -15,7 +15,6 @@ router.get('/', async (req, res) => {
       cat.get({ plain: true })
     );
 
-
     res.render('homepage', {
       cards, 
       cats, 
@@ -55,7 +54,7 @@ router.get('/start', async (req, res) => {
       cards, 
       cats, 
       gameHasStarted: req.session.gameHasStarted,
-      loggedIn: req.session.loggedIn
+      loggedIn: req.session.loggedIn,
     });
   } catch (err) {
     console.log(err);
