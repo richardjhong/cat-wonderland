@@ -18,7 +18,7 @@
                 <a href="/">Cat Wonderland</a>
             </h1>
             <nav>
-                {{#if logged_in}}
+                {{#if loggedIn}}
                 <button class="no-button" id="logout">logout</button>
                 {{else}}
                 <a href="./login">login</a>
@@ -32,12 +32,11 @@
 
         </footer>
     </div>
-    {{#if logged_in}}
+    {{#if loggedIn}}
     <script src="./js/logout.js"</script></script>
     {{/if}}
   </main>  
   <script src="./js/playcard.js"></script>
-  <script src="./js/startgame.js"></script>
   <script src="./js/healthbar.js"></script>
   <script src="./js/discardcard.js"></script>
   <script src="./js/drawcard.js"></script>

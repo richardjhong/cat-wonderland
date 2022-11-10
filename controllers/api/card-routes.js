@@ -21,7 +21,8 @@ router.get('/', async (req, res) => {
       cats, 
       gameHasStarted: req.session.gameHasStarted, 
       maxCardsInHand: deckbuilder.drawn.length === 5, 
-      oneCardHand: deckbuilder.drawn.length === 1 ? false : true
+      oneCardHand: deckbuilder.drawn.length === 1 ? false : true,
+      loggedIn: req.session.loggedIn
     });
 
   } catch (err) {
@@ -53,7 +54,8 @@ router.get('/start', async (req, res) => {
     res.render('homepage', {
       cards, 
       cats, 
-      gameHasStarted: req.session.gameHasStarted
+      gameHasStarted: req.session.gameHasStarted,
+      loggedIn: req.session.loggedIn
     });
   } catch (err) {
     console.log(err);
