@@ -7,7 +7,7 @@ const withAuth = require('../../utils/auth');
 const deckbuilder = new Deckbuilder();
 const discardedPile = [];
 
-router.get('/', withAuth, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const cards = deckbuilder.drawn
     const catData = await Cat.findAll();
@@ -41,7 +41,7 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
-router.get('/start', withAuth, async (req, res) => {
+router.get('/start', async (req, res) => {
   try {
     const catData = await Cat.findAll();
 
@@ -80,7 +80,7 @@ router.get('/start', withAuth, async (req, res) => {
   }
 });
 
-router.post('/play/:id', withAuth, async (req, res) => {
+router.post('/play/:id', async (req, res) => {
   try {
     let cardId = req.params.id;
     await deckbuilder.discard(parseInt(cardId))
@@ -112,7 +112,7 @@ router.post('/play/:id', withAuth, async (req, res) => {
   }
 })
 
-router.post('/discard', withAuth, async (req, res) => {
+router.post('/discard', async (req, res) => {
   try {
     const amountToDraw = req.body.toDiscard.length
     await deckbuilder.discard(req.body.toDiscard)
@@ -127,7 +127,7 @@ router.post('/discard', withAuth, async (req, res) => {
   }
 })
 
-router.get('/draw', withAuth, async (req, res) => {
+router.get('/draw', async (req, res) => {
   try {
     await deckbuilder.draw(1)
     res.status(200).json({ message: 'Card has successfully been drawn.'})
