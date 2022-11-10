@@ -1,11 +1,13 @@
 <section class="container">
-  {{#unless gameHasStarted}}<button class="btn btn-primary" id="startGame">Start Game</button>{{/unless}}
-  {{#each cards as |card|}}
-    {{> card-details enableDrawCards=../maxCardsInHand enableDiscardCards=../oneCardHand}}
-  {{/each}}
-  
-  {{#each cats as |cat|}}
-    {{> cat-details}}
-  {{/each}}
-  <button id="discard-button">Discard</button>
+  {{#if loggedIn}}
+    {{#unless gameHasStarted}}<button class="btn btn-primary" id="startGame">Start Game</button>{{/unless}}
+    {{#each cards as |card|}}
+      {{> card-details enableDrawCards=../maxCardsInHand enableDiscardCards=../oneCardHand}}
+    {{/each}}
+    
+    {{#each cats as |cat|}}
+      {{> cat-details}}
+    {{/each}}
+    <button id="discard-button">Discard</button>    
+  {{/if}}
 </section>
