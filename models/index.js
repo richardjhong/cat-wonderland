@@ -1,16 +1,6 @@
 const User = require('./User');
 const Cat = require('./Cat');
-const Card = require('./Card');
 const Meter = require('./Meter');
-
-User.hasMany(Card, {
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE'
-});
-
-Card.belongsTo(User, {
-  foreignKey: 'user_id',
-});
 
 Cat.hasMany(Meter, {
   foreignKey: 'cat_id',
@@ -31,4 +21,4 @@ Cat.belongsTo(User, {
 });
 
 
-module.exports = { User, Cat, Card, Meter };
+module.exports = { User, Cat, Meter };

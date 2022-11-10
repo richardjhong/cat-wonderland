@@ -1,10 +1,10 @@
 :root {
-  --primary: #3d5852;
+  --primary: #BE271B;
   --secondary: #86938f;
-  --tertiary: #5e877f;
+  --tertiary: #B93598;
   --quatrinary: #6c6b67;
-  --light: #e3e4e3;
-  --dark: #182c23;
+  --light: #ffffff;
+  --dark: #6F2AB1;
   --error: rgb(228, 46, 1);
   --border-radius: 0.3rem;
 }
@@ -31,8 +31,10 @@ a:visited {
 header  {
   padding: 40px;
   text-align: center;
-  background: var(--primary);
+  background-color: var(--tertiary);
+  background-image: linear-gradient(to bottom left, var(--tertiary), #00CEDF);
   color: var(--light);
+  font-family: 'Gloria Hallelujah', cursive;
 }
 
 main {
@@ -137,18 +139,18 @@ img {
   border-radius: var(--border-radius);
   border-style: double;
   border-width: thick;
-  background-color: #577a7c;
+  background-color: var(--tertiary);
   color: var(--light);
 }
 
-.card header {
-  color: var(--light);
+.card-header {
+  font-size: 1.4rem;
+  text-align: center;
   font-weight: bold;
-  text-transform: uppercase;
-  margin: 0;
-  background-color: var(--tertiary);
-  padding: 0.625rem;
-  border-radius: calc(0.18rem - 1px) calc(0.18rem - 1px) 0 0;
+  background-color:#F0F0F0;
+  display:inline-block;
+  padding:1em;
+  text-align:center
 }
 
 .card-body {
@@ -174,4 +176,24 @@ img {
   flex-flow: column wrap;
   align-content: flex-start;
   align-items: center;
+}
+
+input[type="checkbox"]{
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: #fff;
+  border: #7F7F7F 1px solid;
+  margin:0 auto;
+  display:block
+}
+
+.card-header input[type="checkbox"]:checked {
+  background-color:#258E7F;
+  padding:4px;
+  border:#fff 4px solid
+} 
+
+.selected {
+  background-color:#258E7F;
+  color:#fff
 }

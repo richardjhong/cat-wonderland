@@ -5,21 +5,43 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cat Wonderland</title>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Indie+Flower&family=Kalam&family=Kaushan+Script&family=Shalimar&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/css/jass.css">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 
 <body>
-  <header>
-    <h1>Cat Wonderland</h1>
-  </header>
-  <main>
-    <aside>
-      <h2>Click on a forum post and join in on the conversation!</h2>
-    </aside>
-    <div class="post">
-      {{{body}}}
+    <div class="flex-column justify-space-around">
+        <header class="display-flex justify-space-between align-centeer p-2">
+            <h1>
+                <span role="img" aria-label="cat">😺</span>
+                <a href="/">Cat Wonderland</a>
+            </h1>
+            <nav>
+                {{#if loggedIn}}
+                <button class="no-button" id="logout">logout</button>
+                {{else}}
+                <a href="./login">login</a>
+                {{/if}}
+            </nav>
+        </header> 
+        <main class="container-fluid mt-5">
+            {{{ body }}}
+        </main>
+        <footer>
+
+        </footer>
     </div>
+    {{#if loggedIn}}
+    <script src="/js/logout.js"</script></script>
+    {{/if}}
   </main>  
+  <script src="/js/playcard.js"></script>
+  <script src="/js/healthbar.js"></script>
+  <script src="/js/discardcard.js"></script>
+  <script src="/js/drawcard.js"></script>
+  {{#unless gameHasStarted}}
+    <script src="/js/startgame.js"></script>
+  {{/unless}}
 </body>
 </html>
