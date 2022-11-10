@@ -25,6 +25,7 @@ const sess = {
   saveUninitialized: true,
 };
 
+app.set('trust proxy', 1)
 app.use(session(sess));
 
 const hbs = exphbs.create({ helpers });

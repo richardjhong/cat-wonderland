@@ -44,8 +44,8 @@ router.get('/', async (req, res) => {
 router.get('/start', async (req, res) => {
   try {
 
-    const cat3 = await Cat.update( 
-      { health: 130 },
+    await Cat.update( 
+      { health: 100 },
       {
       where: {
         id: 1
