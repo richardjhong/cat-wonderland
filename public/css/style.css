@@ -3,7 +3,7 @@
   --secondary: #86938f;
   --tertiary: #B93598;
   --quatrinary: #6c6b67;
-  --light: #00CEDF;
+  --light: #ffffff;
   --dark: #6F2AB1;
   --error: rgb(228, 46, 1);
   --border-radius: 0.3rem;
@@ -31,8 +31,10 @@ a:visited {
 header  {
   padding: 40px;
   text-align: center;
-  background: var(--primary);
+  background-color: var(--tertiary);
+  background-image: linear-gradient(to bottom left, var(--tertiary), #00CEDF);
   color: var(--light);
+  font-family: 'Gloria Hallelujah', cursive;
 }
 
 main {
