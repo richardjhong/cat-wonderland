@@ -1,5 +1,4 @@
 const Deckbuilder = require('deckbuilder');
-const { response } = require('express');
 const router = require('express').Router();
 const { Cat } = require('../../models');
 const cardPool = require("../../seeds/mockCardData.js")
@@ -15,15 +14,25 @@ router.get('/', async (req, res) => {
       cat.get({ plain: true })
     );
 
-    res.render('homepage', {
-      cards, 
-      cats, 
-      gameHasStarted: req.session.gameHasStarted, 
-      maxCardsInHand: deckbuilder.drawn.length === 5, 
-      oneCardHand: deckbuilder.drawn.length === 1 ? false : true,
-      loggedIn: req.session.loggedIn
-    });
+    req.session.save(() => {
+      if (req.session.gameHasStarted) {
+        req.session.gameTurns = req.session.gameTurns - 1
+      }
+    })
 
+    if (req.session.gameTurns <= 0 || req.session.catHealth <= 0) {
+      res.render('gameover')
+    } else {
+      res.render('homepage', {
+        cards, 
+        cats, 
+        gameHasStarted: req.session.gameHasStarted, 
+        maxCardsInHand: deckbuilder.drawn.length === 5, 
+        oneCardHand: deckbuilder.drawn.length === 1 ? false : true,
+        loggedIn: req.session.loggedIn,
+        gameTurns: req.session.gameTurns || false
+      });
+    }
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -34,9 +43,15 @@ router.get('/start', async (req, res) => {
   try {
     const catData = await Cat.findAll();
 
-    const cats = catData.map((cat) =>
-      cat.get({ plain: true })
-    );
+    await Cat.update( 
+      { health: 100 },
+      {
+      where: {
+        id: 1
+      }
+    })
+
+    const cats = await Cat.findOne({ where: { id: 1 }})
 
     // create starting game hand to player
     deckbuilder.add(cardPool)
@@ -46,15 +61,16 @@ router.get('/start', async (req, res) => {
     const cards = deckbuilder['1']
 
     req.session.save(() => {
-      req.session.catHealth = cats[0].health
+      req.session.catHealth = cats.health
       req.session.gameHasStarted = true;
+      req.session.gameTurns = 10;
     })
 
     res.render('homepage', {
       cards, 
       cats, 
       gameHasStarted: req.session.gameHasStarted,
-      loggedIn: req.session.loggedIn,
+      loggedIn: req.session.loggedIn
     });
   } catch (err) {
     console.log(err);

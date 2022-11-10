@@ -3,7 +3,7 @@ const cardData = [
     id: 1,
     name: 'Restock cat food',
     description: 'Restocked cat food for 3 days!',
-    actionEffect: 5,
+    actionEffect: -5,
   },
   {
     id: 2,
