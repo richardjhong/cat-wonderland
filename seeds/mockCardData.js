@@ -1,5 +1,4 @@
-const cardData = [
-    {
+const cardData = [{
         id: 1,
         name: 'Restock cat food',
         description: 'Restocked cat food for 3 days!',
@@ -88,7 +87,39 @@ const cardData = [
         name: 'Put collar on for cat',
         description: 'If the cat gets lost, the finder knows who to call',
         actionEffect: +5,
+    },
+    {
+        id: 16,
+        name: 'Dont put collar on for cat',
+        description: 'If the cat gets lost, the finder does not know who to call',
+        actionEffect: -5,
+    },
+    {
+        id: 17,
+        name: 'Give your cat a treat',
+        description: 'If cat get treats, cat will feel better',
+        actionEffect: +5,
+    },
+    {
+        id: 18,
+        name: 'Do not give cat treat',
+        description: 'If cat get no treats, cat will be angry',
+        actionEffect: -5,
+    },
+    {
+        id: 19,
+        name: 'Take cat to the groomer',
+        description: 'The cat will not like going to the groomer',
+        actionEffect: -5,
+    },
+    {
+        id: 20,
+        name: 'Do not take cat to the groomer',
+        description: 'The cat will be very pleased that it is not going to the groomer',
+        actionEffect: +5,
     }
+
+
 ];
 
 module.exports = cardData;
