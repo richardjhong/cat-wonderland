@@ -21,6 +21,8 @@ router.get('/', async (req, res) => {
       }
     })
 
+    console.log('req.session.gameHasStarted? ', req.session.gameHasStarted)
+
     if (req.session.gameTurns <= 0 || req.session.catHealth <= 0) {
       res.render('gameover')
     } else {
