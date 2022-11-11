@@ -5,7 +5,6 @@ const cardPool = require("../../seeds/mockCardData.js")
 const withAuth = require('../../utils/auth');
 
 const deckbuilder = new Deckbuilder();
-const discardedPile = [];
 
 router.get('/', async (req, res) => {
   try {
@@ -85,7 +84,6 @@ router.post('/play/:id', async (req, res) => {
   try {
     let cardId = req.params.id;
     await deckbuilder.discard(parseInt(cardId))
-    discardedPile.push(deckbuilder.discarded[0].id)
     if (deckbuilder.deck.length === 0) {
       await deckbuilder.returnDiscarded();
     }
