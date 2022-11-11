@@ -68,6 +68,7 @@ router.get('/start', async (req, res) => {
       req.session.catHealth = health
       req.session.gameHasStarted = true;
       req.session.gameTurns = 20;
+      console.log('unique console log: ', req.session.gameHasStarted)
     })
 
     res.render('homepage', {
