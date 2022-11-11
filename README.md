@@ -40,7 +40,7 @@ node server.js
 ```
 ## Usage
 
-Heroku link:
+Heroku link: https://cat-wonderland.herokuapp.com/
 
 When the user enters the site they will be able click login to sign up. 
 ![Welcome](https://github.com/richardjhong/cat-wonderland/blob/main/assets/Welcome.png)
