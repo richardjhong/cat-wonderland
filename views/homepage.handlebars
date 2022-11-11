@@ -3,7 +3,9 @@
     {{#if gameHasStarted}}
       <p>Game turns: {{gameTurns}}</p>
     {{/if}}
-    {{#unless gameHasStarted}}<button class="btn btn-primary" id="startGame">Start Game</button>{{/unless}}
+    {{#unless gameHasStarted}}
+    <button class="btn btn-primary" id="startGame">Start Game</button>
+    {{/unless}}
     {{#each cards as |card|}}
       {{> card-details enableDrawCards=../maxCardsInHand enableDiscardCards=../oneCardHand}}
     {{/each}}
