@@ -13,14 +13,13 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Set up sessions
-app.set('trust proxy', 1)
 const sess = {
   secret: 'Super secret secret',
   cookie: {
     maxAge: 60 * 60 * 1000,
     httpOnly: true,
-    secure: true,
-    sameSite: 'none',
+    secure: false,
+    sameSite: 'strict',
   },
   resave: false,
   saveUninitialized: true,
