@@ -21,8 +21,6 @@ router.get('/', async (req, res) => {
       }
     })
 
-    console.log('req.session.gameHasStarted? ', req.session.gameHasStarted)
-
     if (req.session.gameTurns <= 0 || req.session.catHealth <= 0) {
       res.render('gameover')
     } else {
@@ -68,7 +66,6 @@ router.get('/start', async (req, res) => {
       req.session.catHealth = health
       req.session.gameHasStarted = true;
       req.session.gameTurns = 20;
-      console.log('unique console log: ', req.session.gameHasStarted)
     })
 
     setTimeout(() => {
