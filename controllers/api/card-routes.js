@@ -71,12 +71,17 @@ router.get('/start', async (req, res) => {
       console.log('unique console log: ', req.session.gameHasStarted)
     })
 
-    res.render('homepage', {
-      cards, 
-      cats, 
-      gameHasStarted: req.session.gameHasStarted,
-      loggedIn: req.session.loggedIn
-    });
+    setTimeout(() => {
+      res.render('homepage', {
+        cards, 
+        cats, 
+        gameHasStarted: req.session.gameHasStarted,
+        loggedIn: req.session.loggedIn
+      });
+    }, "3000")
+
+
+     
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
